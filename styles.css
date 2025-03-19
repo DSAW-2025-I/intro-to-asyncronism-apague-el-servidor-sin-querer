@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    font-size: 16px;
+}
+
+header {
+    background-color: #3498db;
+    padding: 1rem;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #5744d1;
+}
+
+button:focus {
+    outline: none;
+}
+
+.pokemon-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+}
+
+.pokemon-detail.active {
+    display: flex;
+}
+
+.pokemon-detail #pokemon-info {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 600px;
+    text-align: center;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px;
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+    text-transform: capitalize;
+    transition: all 0.2s ease;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.pokemon-card .pokemon-name {
+    font-size: 18px;
+    margin-top: 0.5rem;
+}
+
+.pokemon-card .types {
+    margin-top: 0.5rem;
+}
+
+.types span {
+    background-color: #eee;
+    padding: 0.3rem 0.5rem;
+    border-radius: 20px;
+    margin: 0.2rem;
+    font-size: 0.9rem;
+}
+
+#close-detail {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: red;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#close-detail:hover {
+    background-color: darkred;
+}
+
+/* Estilos por tipo */
+.normal {
+    background-color: #A8A878;
+    color: white;
+}
+
+.fire {
+    background-color: #F08030;
+    color: white;
+}
+
+.water {
+    background-color: #6890F0;
+    color: white;
+}
+
+.grass {
+    background-color: #78C850;
+    color: white;
+}
+
+.electric {
+    background-color: #F8D030;
+    color: white;
+}
+
+.ice {
+    background-color: #98D8D8;
+    color: white;
+}
+
+.fighting {
+    background-color: #C03028;
+    color: white;
+}
+
+.poison {
+    background-color: #A040A0;
+    color: white;
+}
+
+.ground {
+    background-color: #E0C068;
+    color: white;
+}
+
+.flying {
+    background-color: #A890F0;
+    color: white;
+}
+
+.psychic {
+    background-color: #F85888;
+    color: white;
+}
+
+.bug {
+    background-color: #A8B820;
+    color: white;
+}
+
+.rock {
+    background-color: #B8A038;
+    color: white;
+}
+
+.ghost {
+    background-color: #705898;
+    color: white;
+}
+
+.dark {
+    background-color: #705848;
+    color: white;
+}
+
+.dragon {
+    background-color: #7038F8;
+    color: white;
+}
+
+.steel {
+    background-color: #B8B8D0;
+    color: white;
+}
+
+.fairy {
+    background-color: #EE99AC;
+    color: white;
+}
+
+/* Transición suave al mostrar detalles */
+.pokemon-card.active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-detail .pokemon-info {
+    transition: transform 0.5s ease-out;
+}
+
+/* Modal de información detallada */
+.pokemon-info h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.pokemon-info p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.pokemon-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.pokemon-info ul li {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.pokemon-info img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin: 1rem 0;
+}
