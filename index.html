@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <button id="ver-todos">Ver todos</button>
+            <button id="normal">Normal</button>
+            <button id="fire">Fire</button>
+            <button id="water">Water</button>
+            <button id="grass">Grass</button>
+            <button id="electric">Electric</button>
+            <button id="ice">Ice</button>
+            <button id="fighting">Fighting</button>
+            <button id="poison">Poison</button>
+            <button id="ground">Ground</button>
+            <button id="flying">Flying</button>
+            <button id="psychic">Psychic</button>
+            <button id="bug">Bug</button>
+            <button id="rock">Rock</button>
+            <button id="ghost">Ghost</button>
+            <button id="dark">Dark</button>
+            <button id="dragon">Dragon</button>
+            <button id="steel">Steel</button>
+            <button id="fairy">Fairy</button>
+            <button id="quitar-filtro">Quitar filtro</button>
+            <button id="habilidad">Buscar por habilidad</button>
+        </div>
+        
+        <input type="text" id="search-bar" placeholder="Buscar por nombre o número...">
+
+
+    </header>
+
+    <main id="pokemon-list">
+        <!-- Los Pokémon se cargarán aquí -->
+    </main>
+
+    <!-- Detalle de Pokémon -->
+    <div id="pokemon-detail" class="pokemon-detail">
+        <button id="close-detail" class="close-detail">X</button>
+        <div id="pokemon-info">
+            <!-- Aquí se mostrará la info detallada del Pokémon -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
