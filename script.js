@@ -1,28 +1,31 @@
-const listaPokemon = document.querySelector("#pokemon-list");
+const pokemonList = document.querySelector("#pokemon-list");
 const pokemonDetail = document.querySelector("#pokemon-detail");
 const closeDetail = document.querySelector("#close-detail");
 const pokemonInfo = document.querySelector("#pokemon-info");
-const botonesHeader = document.querySelectorAll(".nav button");
-const URL = "https://pokeapi.co/api/v2/pokemon/";
-const habilidadURL = "https://pokeapi.co/api/v2/ability/";
-const tipoURL = "https://pokeapi.co/api/v2/type/";
-let todosPokemones = [];
+const headerButtons = document.querySelectorAll(".nav button");
+const searchBar = document.querySelector("#search-bar");
 
-async function cargarPokemon() {
+const pokemonURL = "https://pokeapi.co/api/v2/pokemon/";
+const abilityURL = "https://pokeapi.co/api/v2/ability/";
+const typeURL = "https://pokeapi.co/api/v2/type/";
+
+let allPokemon = [];
+
+async function loadPokemon() {
     for (let i = 1; i <= 1025; i++) {
         try {
-            const response = await fetch(URL + i);
+            const response = await fetch(pokemonURL + i);
             const data = await response.json();
-            todosPokemones.push(data);
-            mostrarPokemon(data);
+            allPokemon.push(data);
+            displayPokemon(data);
         } catch (error) {
             console.error(`Error cargando Pokémon #${i}:`, error);
         }
     }
 }
 
-function mostrarPokemon(poke) {
-    let tipos = poke.types.map(type => `<span class="type ${type.type.name}">${type.type.name}</span>`).join('');
+function displayPokemon(poke) {
+    let types = poke.types.map(type => `<span class="type ${type.type.name}">${type.type.name}</span>`).join('');
     let pokeId = poke.id.toString().padStart(3, '0');
 
     const div = document.createElement("div");
@@ -31,13 +34,13 @@ function mostrarPokemon(poke) {
         <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
         <p class="pokemon-id">#${pokeId}</p>
         <p class="pokemon-name">${poke.name}</p>
-        <div class="types">${tipos}</div>
+        <div class="types">${types}</div>
     `;
-    div.addEventListener("click", () => mostrarDetalle(poke));
-    listaPokemon.append(div);
+    div.addEventListener("click", () => showPokemonDetail(poke));
+    pokemonList.append(div);
 }
 
-function mostrarDetalle(poke) {
+function showPokemonDetail(poke) {
     pokemonInfo.innerHTML = `
         <h2>${poke.name}</h2>
         <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
@@ -57,21 +60,35 @@ closeDetail.addEventListener("click", () => {
     pokemonDetail.classList.remove("active");
 });
 
-botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
-    const botonId = event.currentTarget.id;
+headerButtons.forEach(button => button.addEventListener("click", (event) => {
+    const buttonId = event.currentTarget.id;
 
-    if (botonId === "quitar-filtro" || botonId === "ver-todos") {
-        listaPokemon.innerHTML = "";
-        todosPokemones.forEach(poke => mostrarPokemon(poke));
+    if (buttonId === "quitar-filtro" || buttonId === "ver-todos") {
+        pokemonList.innerHTML = "";
+        allPokemon.forEach(poke => displayPokemon(poke));
     } else {
-        listaPokemon.innerHTML = "";
-        todosPokemones.forEach(poke => {
-            const tipos = poke.types.map(type => type.type.name);
-            if (tipos.includes(botonId)) {
-                mostrarPokemon(poke);
+        pokemonList.innerHTML = "";
+        allPokemon.forEach(poke => {
+            const types = poke.types.map(type => type.type.name);
+            if (types.includes(buttonId)) {
+                displayPokemon(poke);
             }
         });
     }
 }));
 
-document.addEventListener("DOMContentLoaded", cargarPokemon);
+searchBar.addEventListener("input", (e) => {
+    const filter = e.target.value.toLowerCase().trim(); 
+    pokemonList.innerHTML = ""; // Limpiar la lista
+
+    const filteredPokemon = allPokemon.filter(poke => 
+        poke.name.toLowerCase().includes(filter) || poke.id.toString().includes(filter)
+    );
+
+    filteredPokemon.forEach(poke => displayPokemon(poke));
+});
+
+document.addEventListener("DOMContentLoaded", loadPokemon);
+
+
+
